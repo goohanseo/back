@@ -18,7 +18,8 @@ public class MarketInterestRateService {
     private MarketInterestRateRepository marketInterestRateRepository;
 
     public MarketInterestRateDto getLatestMarketInterestRate() {
-        MarketInterestRate marketInterestRate = marketInterestRateRepository.findTopByOrderByDateDesc();
+        MarketInterestRate marketInterestRate = marketInterestRateRepository.findTopByOrderByDateDesc()
+                .orElseThrow(() -> new RuntimeException("Market interest rate not found"));
         return convertToDto(marketInterestRate);
     }
 

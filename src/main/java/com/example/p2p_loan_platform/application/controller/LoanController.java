@@ -16,37 +16,9 @@ public class LoanController {
     @Autowired
     private LoanService loanService;
 
-    @GetMapping
-    public List<LoanDto> getAllLoans() {
-        return loanService.getAllLoans();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<LoanDto> getLoanById(@PathVariable Long id) {
-        Optional<LoanDto> loanDto = loanService.getLoanById(id);
-        return loanDto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public LoanDto createLoan(@RequestBody LoanDto loanDto) {
-        return loanService.saveLoan(loanDto);
-    }
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<LoanDto> updateLoan(@PathVariable Long id, @RequestBody LoanDto loanDto) {
-//        if (!loanService.getLoanById(id).isPresent()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        loanDto.setId(id);
-//        return ResponseEntity.ok(loanService.saveLoan(loanDto));
-//    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteLoan(@PathVariable Long id) {
-        if (!loanService.getLoanById(id).isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        loanService.deleteLoan(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/apply")
+    public ResponseEntity<LoanDto> applyForLoan(@RequestBody LoanDto loanDto) {
+        LoanDto appliedLoan = loanService.applyForLoan(loanDto);
+        return ResponseEntity.ok(appliedLoan);
     }
 }

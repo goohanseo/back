@@ -95,7 +95,8 @@ public class DebtorService {
         String repaymentType = requestDto.getRepaymentType();
 
         // 최신 시장 금리 가져오기
-        MarketInterestRate marketInterestRate = marketInterestRateRepository.findTopByOrderByDateDesc();
+        MarketInterestRate marketInterestRate = marketInterestRateRepository.findTopByOrderByDateDesc()
+                .orElseThrow(() -> new RuntimeException("Market interest rate not found"));
         double annualInterestRate = marketInterestRate.getRate();
         double monthlyInterestRate = annualInterestRate / 12 / 100;
 

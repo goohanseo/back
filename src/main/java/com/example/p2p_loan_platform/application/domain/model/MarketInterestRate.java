@@ -18,4 +18,5 @@ public class MarketInterestRate {
     private Long id;
     private double rate;
     private LocalDate date;
+
 }
