@@ -1,4 +1,4 @@
-package com.example.p2p_loan_platform;
+package com.example.p2p_loan_platform.application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
